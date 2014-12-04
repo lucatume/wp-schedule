@@ -1,0 +1,27 @@
+{
+    "name": "lucatume/wp-schedule",
+    "description": "Utility wrapping of WordPress cron scheduling system.",
+    "license": "GPL 2.0",
+    "authors": [{
+        "name": "theAverageDev",
+        "email": "luca@theaveragedev.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "xrstf/composer-php52": "~1.0"
+    },
+    "scripts": {
+        "post-install-cmd": ["xrstf\\Composer52\\Generator::onPostInstallCmd"],
+        "post-update-cmd": ["xrstf\\Composer52\\Generator::onPostInstallCmd"],
+        "post-autoload-dump": ["xrstf\\Composer52\\Generator::onPostInstallCmd"]
+    },
+    "autoload": {
+        "psr-0": {
+            "WPSchedule_": "src/"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "~2.1",
+        "lucatume/function-mocker": "~0.2"
+    }
+}
