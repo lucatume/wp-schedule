@@ -16,14 +16,14 @@
 		/**
 		 * Schedules an event.
 		 *
-		 * @param                                                                    $hook
-		 * @param WPSchedule_Schedule_TimeInterface                                  $activation_time
-		 * @param WPSchedule_Interval_IntervalInterface                              $recurrence_interval
-		 * @param array                                                              $args
+		 * @param WPSchedule_Schedule_TimeInterface     $activation_time
+		 * @param WPSchedule_Interval_IntervalInterface $recurrence_interval
+		 * @param string                                $hook
+		 * @param array                                 $args
 		 *
 		 * @return mixed
 		 */
-		public function schedule( $hook, WPSchedule_Schedule_TimeInterface $activation_time, WPSchedule_Interval_IntervalInterface $recurrence_interval, array $args = null );
+		public function schedule( WPSchedule_Schedule_TimeInterface $activation_time, WPSchedule_Interval_IntervalInterface $recurrence_interval, $hook, array $args = null );
 
 		/**
 		 * Removes an event from the schedule.
@@ -38,25 +38,25 @@
 		/**
 		 * Schedules a single event.
 		 *
-		 * @param                                        $hook
-		 * @param WPSchedule_Schedule_TimeInterface      $activation_Time
-		 * @param array                                  $args
+		 * @param WPSchedule_Schedule_TimeInterface $activation_Time
+		 * @param string                            $hook
+		 * @param array                             $args
 		 *
 		 * @return mixed
 		 */
-		public function schedule_single_event( $hook, WPSchedule_Schedule_TimeInterface $activation_Time, array $args = null );
+		public function schedule_single_event( WPSchedule_Schedule_TimeInterface $activation_Time, $hook, array $args = null );
 
 		/**
 		 * Updates the schedule for an event.
 		 *
-		 * @param                                                                    $hook
-		 * @param Time|WPSchedule_Schedule_TimeInterface                             $activation_Time
-		 * @param WPSchedule_Interval_Interval|WPSchedule_Interval_IntervalInterface $recurrence_Interval
-		 * @param array                                                              $args
+		 * @param Time|WPSchedule_Schedule_TimeInterface $activation_Time
+		 * @param WPSchedule_Interval_IntervalInterface  $recurrence_Interval
+		 * @param string                                 $hook
+		 * @param array                                  $args
 		 *
 		 * @return mixed
 		 */
-		public function reschedule( $hook, WPSchedule_Schedule_TimeInterface $activation_Time, WPSchedule_Interval_IntervalInterface $recurrence_Interval, array $args = null );
+		public function reschedule( WPSchedule_Schedule_TimeInterface $activation_Time, WPSchedule_Interval_IntervalInterface $recurrence_Interval, $hook, array $args = null );
 
 	}
 
