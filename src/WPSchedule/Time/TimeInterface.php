@@ -1,6 +1,12 @@
 <?php
 
 
-	interface WPSchedule_Schedule_TimeInterface {
+	interface WPSchedule_Time_TimeInterface {
 
+		/**
+		 * Returns a Unix timestamp.
+		 *
+		 * @return int
+		 */
+		public function getTime();
 	}

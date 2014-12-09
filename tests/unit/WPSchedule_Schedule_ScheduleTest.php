@@ -89,4 +89,19 @@ class WPSchedule_Schedule_ScheduleTest extends \PHPUnit_Framework_TestCase
 	        $this->assertTrue($this->sut->isScheduled('some_hook', ['some', 'args']));
 	        $this->assertFalse($this->sut->isScheduled('some_hook'));
         }
+
+    /**
+     * @test
+     * it should properly call wp_schedule_event with given parameters
+     */
+    public function it_should_properly_call_wp_schedule_event_with_given_parameters() {
+        $now = time();
+        $time = FunctionMocker::replace('\WPSchedule_Time_TimeInterface::getTime', $now);
+        $interval = FunctionMocker::replace('\WPSchedule_Interval_IntervalInterface::getInterval', 500);
+        $wp_schedule_event = FunctionMocker::replace('wp_schedule_event', true);
+
+        $this->sut->schedule($time, $interval, 'some_hook');
+
+        $wp_schedule_event->wasCalledWithOnce([$now, 500, 'some_hook', null]);
+    }
 }
