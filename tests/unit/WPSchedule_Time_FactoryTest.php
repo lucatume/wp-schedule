@@ -21,7 +21,7 @@
 
 			$time = WPSchedule_Time_Factory::make( 'some_hook' );
 
-			$this->assertInstanceOf( 'WPSchedule_Time_Now', $time );
+			$this->assertInstanceOf(WPSchedule_Time_Factory::getDefaultClass() , $time );
 		}
 
 		public function notATimeSlug() {
