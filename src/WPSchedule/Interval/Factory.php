@@ -1,33 +1,23 @@
 <?php
 
 
-	class WPSchedule_Interval_Factory implements WPSchedule_Interface_FactoryInterface {
+	class WPSchedule_Interval_Factory extends WPSchedule_Abstract_FactoryData {
+
+		public $optionPostfix   = '_schedule_interval';
+		public $defaultSlug     = '1m';
+		public $defaultClass    = 'WPSchedule_Interval_OneMinute';
+		public $slugsAndClasses = array(
+			'1m' => 'WPSchedule_Interval_OneMinute',
+			'1h' => 'WPSchedule_Interval_OneHour',
+			'12h' => 'WPSchedule_Interval_TwelveHours',
+		);
+
+		protected static $type = 'interval';
 
 		public static function make( $hook, array $args = null ) {
-			if ( ! is_string( $hook ) ) {
-				throw new Exception( 'Hook name must be a string' );
-			}
+			WPSchedule_Factory_OptionFactory::register( self::$type, new self() );
 
-			$intervalSlug = get_option( $hook . '_schedule_interval', '1m' );
-			$intervalSlug = is_string( $intervalSlug ) ? $intervalSlug : '1m';
-
-			$instance = null;
-
-			switch ( $intervalSlug ) {
-				case '12h':
-					$instance = new WPSchedule_Interval_TwelveHours();
-					break;
-				case '1h':
-					$instance = new WPSchedule_Interval_OneHour();
-					break;
-				case '1m':
-					$instance = new WPSchedule_Interval_OneMinute();
-					break;
-				default:
-					$instance = new WPSchedule_Interval_OneMinute();
-					break;
-			}
-
-			return $instance;
+			return WPSchedule_Factory_OptionFactory::make( self::$type, $hook, $args );
 		}
+
 	}

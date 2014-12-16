@@ -20,8 +20,9 @@
 			FunctionMocker::replace( 'get_option', false );
 
 			$time = WPSchedule_Time_Factory::make( 'some_hook' );
+			$sut = new WPSchedule_Time_Factory();
 
-			$this->assertInstanceOf(WPSchedule_Time_Factory::getDefaultClass() , $time );
+			$this->assertInstanceOf( $sut->getDefaultClass(), $time );
 		}
 
 		public function notATimeSlug() {
@@ -43,12 +44,14 @@
 			FunctionMocker::replace( 'get_option', $timeSlug );
 
 			$time = WPSchedule_Time_Factory::make( 'some_hook' );
+			$sut = new WPSchedule_Time_Factory();
 
-			$this->assertInstanceOf( 'WPSchedule_Time_Now', $time );
+			$this->assertInstanceOf( $sut->getDefaultClass(), $time );
 		}
 
 		public function legitTimeSlugs() {
-			$pairs = WPSchedule_Time_Factory::getSlugsAndClasses();
+			$factory = new WPSchedule_Time_Factory;
+			$pairs = $factory->getSlugsAndClasses();
 			$out = [ ];
 			array_walk( $pairs, function ( $class, $slug ) use ( &$out ) {
 				$out[] = [ $slug, $class ];
@@ -66,6 +69,7 @@
 			FunctionMocker::replace( 'get_option', $timeSlug );
 
 			$time = WPSchedule_Time_Factory::make( 'some_hook' );
+			$sut = new WPSchedule_Time_Factory();
 
 			$this->assertInstanceOf( $class, $time );
 		}

@@ -1,45 +1,26 @@
 <?php
 
 
-	class WPSchedule_Time_Factory implements WPSchedule_Interface_FactoryInterface {
+	class WPSchedule_Time_Factory extends WPSchedule_Abstract_FactoryData {
 
-		protected static $slugsAndClasses = array(
+		public $optionPostfix   = '_schedule_time';
+		public $defaultSlug     = 'now';
+		public $defaultClass    = 'WPSchedule_Time_Now';
+		public $slugsAndClasses = array(
 			'now' => 'WPSchedule_Time_Now',
 			'8pm' => 'WPSchedule_Time_EightPM',
 			'8am' => 'WPSchedule_Time_EightAM'
 		);
 
-		protected static $optionPostfix = '_schedule_time';
-		protected static $defaultSlug   = 'now';
-		protected static $defaultClass  = 'WPSchedule_Time_Now';
+		protected static $type = 'time';
 
 		public static function make( $hook, array $args = null ) {
-			if ( ! is_string( $hook ) ) {
-				throw new Exception( 'Hook name must be a string' );
-			}
+			WPSchedule_Factory_OptionFactory::register( self::$type, new self() );
 
-			$timeSlug = get_option( $hook . self::$optionPostfix, self::$defaultSlug );
-			$timeSlug = self::isLegitSlug( $timeSlug ) ? $timeSlug : self::$defaultSlug;
-
-			$instance = null;
-
-			$slugsAndClasses = self::getSlugsAndClasses();
-			$class = $slugsAndClasses[ $timeSlug ];
-
-			return new $class;
+			return WPSchedule_Factory_OptionFactory::make( self::$type, $hook, $args );
 		}
 
-		public static function getSlugsAndClasses() {
-			return self::$slugsAndClasses;
-		}
-
-		public static function isLegitSlug( $timeSlug ) {
-			$slugsAndClasses = self::getSlugsAndClasses();
-
-			return is_string( $timeSlug ) && array_key_exists( $timeSlug, $slugsAndClasses );
-		}
-
-		public static function getDefaultClass() {
-			return self::$defaultClass;
-		}
 	}
+
+
+
