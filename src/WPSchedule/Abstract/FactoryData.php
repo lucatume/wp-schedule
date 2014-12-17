@@ -1,7 +1,7 @@
 <?php
 
 
-	class WPSchedule_Abstract_FactoryData implements WPSchedule_Interface_FactoryDataInterface, WPSchedule_Interface_FactoryInterface {
+	abstract class WPSchedule_Abstract_FactoryData implements WPSchedule_Interface_FactoryDataInterface, WPSchedule_Interface_FactoryInterface {
 
 		/**
 		 * @return string
