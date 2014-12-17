@@ -21,4 +21,12 @@ interface WPSchedule_Interface_FactoryDataInterface {
 	 * @return array
 	 */
 	public function getSlugsAndClasses();
+
+	/**
+	 * @param $slug
+	 *
+	 * @return bool
+	 */
+	public function isLegitSlug( $slug );
 }
+

@@ -12,10 +12,9 @@
 			'8am' => 'WPSchedule_Time_EightAM'
 		);
 
-		protected static $type = 'time';
+		public static $type = 'time';
 
 		public static function make( $hook, array $args = null ) {
-			WPSchedule_Factory_OptionFactory::register( self::$type, new self() );
 
 			return WPSchedule_Factory_OptionFactory::make( self::$type, $hook, $args );
 		}
@@ -23,4 +22,4 @@
 	}
 
 
-
+	WPSchedule_Factory_OptionFactory::register( WPSchedule_Time_Factory::$type, new WPSchedule_Time_Factory() );

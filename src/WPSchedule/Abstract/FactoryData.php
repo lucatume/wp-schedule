@@ -1,7 +1,7 @@
 <?php
 
 
-	class WPSchedule_Abstract_FactoryData implements WPSchedule_Interface_FactoryDataInterface {
+	class WPSchedule_Abstract_FactoryData implements WPSchedule_Interface_FactoryDataInterface, WPSchedule_Interface_FactoryInterface {
 
 		/**
 		 * @return string
@@ -35,5 +35,9 @@
 			$slugsAndClasses = $this->getSlugsAndClasses();
 
 			return is_string( $slug ) && array_key_exists( $slug, $slugsAndClasses );
+		}
+
+		public static function make( $hook, array $args = null ) {
+			throw new Exception( 'Method not implemented1' );
 		}
 	}
